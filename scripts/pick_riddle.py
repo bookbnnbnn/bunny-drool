@@ -7,7 +7,7 @@ Usage:
 Output (JSON):
   { "question": "...", "answer": "..." }
 
-歷史紀錄存在 ~/.claude/morning-avatar-history.json。
+歷史紀錄存在 ~/.claude/bunny-drool-history.json。
 題庫用完時自動重置。
 """
 import hashlib
@@ -16,7 +16,7 @@ import os
 import random
 from datetime import datetime, timezone, timedelta
 
-HISTORY_FILE = os.path.expanduser("~/.claude/morning-avatar-history.json")
+HISTORY_FILE = os.path.expanduser("~/.claude/bunny-drool-history.json")
 
 RIDDLES = [
     {"question": "哪兩個英文字母放在一起會爆炸？", "answer": "O和K（OK蹦）"},
