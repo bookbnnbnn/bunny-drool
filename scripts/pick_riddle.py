@@ -7,16 +7,17 @@ Usage:
 Output (JSON):
   { "question": "...", "answer": "..." }
 
-歷史紀錄存在 ~/.claude/bunny-drool-history.json。
+歷史紀錄存在 ~/.claude/desk-buddy-history.json。
 題庫用完時自動重置。
 """
+import argparse
 import hashlib
 import json
 import os
 import random
 from datetime import datetime, timezone, timedelta
 
-HISTORY_FILE = os.path.expanduser("~/.claude/bunny-drool-history.json")
+HISTORY_FILE = os.path.expanduser("~/.claude/desk-buddy-history.json")
 
 RIDDLES = [
     {"question": "哪兩個英文字母放在一起會爆炸？", "answer": "O和K（OK蹦）"},
@@ -36,13 +37,17 @@ RIDDLES = [
     {"question": "什麼動物最容易被貼在牆壁上？", "answer": "海豹（海報）"},
     {"question": "布跟紙怕什麼？", "answer": "布怕一萬，紙怕萬一（不怕一萬，只怕萬一）"},
     {"question": "麒麟飛到北極會變成什麼？", "answer": "冰淇淋（冰麒麟）"},
-    {"question": "什麼筆不能寫字？", "answer": "電筆（電鼻）"},
     {"question": "世界上什麼人一下子變老？", "answer": "新娘（今天是新娘，明天是老婆）"},
     {"question": "有一隻熊走過來，猜一成語？", "answer": "有備而來（有bear而來）"},
 ]
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", default=None,
+                        help="覆蓋日期 seed（demo 模式：傳入 state.demo_riddle_seed，讓每居体驗不同譜語）")
+    args = parser.parse_args()
+
     # 讀取歷史
     history = []
     if os.path.exists(HISTORY_FILE):
@@ -61,10 +66,15 @@ def main():
         history = []
         available = RIDDLES[:]
 
-    # 以日期為種子，同一天內多次呼叫會得到同一題
-    tz = timezone(timedelta(hours=8))
-    today = datetime.now(tz).strftime("%Y-%m-%d")
-    seed = int(hashlib.md5(today.encode()).hexdigest(), 16)
+    # 以 seed 決定今日譜語，同一天內多次呼叫會得到同一題
+    if args.seed:
+        # demo 模式：用傳入的 seed，每居會不一様
+        seed = int(hashlib.md5(args.seed.encode()).hexdigest(), 16)
+        today = args.seed  # 用作历史記錄的 key
+    else:
+        tz = timezone(timedelta(hours=8))
+        today = datetime.now(tz).strftime("%Y-%m-%d")
+        seed = int(hashlib.md5(today.encode()).hexdigest(), 16)
     random.seed(seed)
     pick = random.choice(available)
 

@@ -24,20 +24,21 @@ def main():
         now = now.replace(hour=h, minute=m, second=0, microsecond=0)
 
     start = now.replace(hour=9, minute=0, second=0, microsecond=0)
-    end = now.replace(hour=18, minute=0, second=0, microsecond=0)
+    end = now.replace(hour=17, minute=45, second=0, microsecond=0)
 
     elapsed = (now - start).total_seconds() / 60
     total = (end - start).total_seconds() / 60
     pct = max(0.0, min(1.0, elapsed / total))
 
-    filled = int(pct * 10)
-    bar = "█" * filled + "░" * (10 - filled)
+    filled = int(pct * 15)
+    bar = "▓" * filled + "░" * (15 - filled)
 
     remaining = max(0.0, (end - now).total_seconds())
     hours = int(remaining // 3600)
     minutes = int((remaining % 3600) // 60)
 
-    print(f"{bar}|{hours}|{minutes}|{int(pct * 100)}")
+    current_time = f"{now.hour:02d}:{now.minute:02d}"
+    print(f"{current_time}|{bar}|{hours}|{minutes}|{int(pct * 100)}")
 
 
 if __name__ == "__main__":
