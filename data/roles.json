@@ -1,0 +1,66 @@
+{
+  "_note": "角色耳朵固定集合。ears 為不可更改的清單——Claude 組裝貼圖時只能從此處選擇，不可增加、修改或替換任何耳朵。faces 可自由創作，遵照各角色的 face_formula 即可。",
+  "bunny": {
+    "face_formula": "([臉])，臉可自由創作，使用圓括號包裹",
+    "face_note": "每行前置 3 個空格。兔子臉用圓括號 ( ) 包裹",
+    "ears": {
+      "upright": {
+        "ascii": "(\\__/)",
+        "label": "直立",
+        "emotions": ["happy", "stressed", "coding"],
+        "description": "開心、興奮、壓力崩潰、在寫 code"
+      },
+      "spread": {
+        "ascii": "(\\_/)",
+        "label": "展開",
+        "emotions": ["neutral", "sad"],
+        "description": "放鬆、平靜、陪伴"
+      },
+      "right_droop": {
+        "ascii": "/)_/)",
+        "label": "右垂",
+        "emotions": ["tired", "sad"],
+        "description": "疲憊、難過"
+      },
+      "left_droop": {
+        "ascii": "(\\_(\\ ",
+        "label": "左垂",
+        "emotions": ["confused_boss", "annoyed"],
+        "description": "困惑、對老闆、煩躁、懷疑"
+      }
+    },
+    "ears_note": "所有耳朵中間都有 `_`，確保寬度一致。以上四種為全部，不可增加。"
+  },
+  "kitty": {
+    "face_formula": "[= 眼 ω 眼]，嘴固定為 ω，左側 = 為鬍鬚",
+    "face_note": "每行前置 3 個空格。眼睛可自由創作（如 • ^ - > ° 等），但格式必須是 [=眼ω眼]",
+    "face_examples": {
+      "neutral": "[=•ω•]",
+      "happy": "[=^ω^]",
+      "tired": "[=-ω-]",
+      "stressed": "[=>ω<]",
+      "confused": "[=°ω°]"
+    },
+    "ears": {
+      "normal": {
+        "ascii": "/\\_/\\",
+        "label": "正常",
+        "emotions": ["neutral", "happy"],
+        "description": "平靜、開心"
+      },
+      "relaxed": {
+        "ascii": "/)_(",
+        "label": "外八放鬆",
+        "emotions": ["tired", "neutral"],
+        "description": "疲憊、陪伴"
+      },
+      "fluffy": {
+        "ascii": "/|_|\\",
+        "label": "炸毛",
+        "emotions": ["stressed", "annoyed", "confused_boss"],
+        "description": "壓力、崩潰、生氣、煩躁"
+      }
+    },
+    "ears_note": "以上三種為全部，不可增加或修改。"
+  }
+}

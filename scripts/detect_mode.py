@@ -73,6 +73,8 @@ def main():
     parser.add_argument("--riddle-hour", type=int, default=10)
     parser.add_argument("--force-sticker", action="store_true",
                         help="謎語互動模式：強制 companion_variant 不為 silent")
+    parser.add_argument("--detected-emotion", default=None,
+                        help="由 Claude 傳入已偵測的情緒 key（直接寫入輸出 JSON，供 generate_sticker.py 使用）")
     args = parser.parse_args()
 
     # --reset：清除狀態檔
@@ -230,6 +232,8 @@ def main():
     }
     if companion_variant:
         result["companion_variant"] = companion_variant
+    if args.detected_emotion:
+        result["detected_emotion"] = args.detected_emotion
     print(json.dumps(result, ensure_ascii=False))
 
 
